@@ -9,6 +9,15 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+// import DateFnsUtils from "@date-io/date-fns";
+
+// import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  DateTimePicker,
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 
 import {
   FormControl,
@@ -49,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     marginBottom: "35px",
   },
+  dateTimePicker: {
+    marginBottom: theme.spacing(1),
+  },
+  temp: {
+    maxWidth: "200px",
+  },
 }));
 
 const initialFValues = {
@@ -85,6 +100,12 @@ export default function ArgonForm() {
   const handleRadioChange = (event) => {
     setRadioValue(event.target.value);
   };
+  const [selectedDate, handleDateChange] = useState(new Date());
+
+  const handleDateChangee = (event) => {
+    handleDateChange(event);
+  };
+
   const handlePassingYearChange = (event) => {
     setPassingYear(event.target.value);
   };
@@ -303,6 +324,27 @@ export default function ArgonForm() {
                   }
                   // label="Gilad Gray"
                 />
+              </FormControl>
+            </Grid>
+
+            <Grid container>
+              <FormControl component="fieldset">
+                <FormLabel
+                  component="legend"
+                  className={classes.dateTimePicker}
+                >
+                  Please select the Date and Time of your prospective return to
+                  Thapar University
+                </FormLabel>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <DateTimePicker
+                    className={classes.temp}
+                    // label="Time pick"
+                    inputVariant="outlined"
+                    value={selectedDate}
+                    onChange={handleDateChangee}
+                  />
+                </MuiPickersUtilsProvider>
               </FormControl>
             </Grid>
           </Grid>
