@@ -7,6 +7,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import Slider from "@material-ui/core/Slider";
+import Typography from "@material-ui/core/Typography";
+import Switch from "@material-ui/core/Switch";
 
 import {
   FormControl,
@@ -69,6 +71,7 @@ export default function ArgonForm() {
     checkedB: true,
     checkedC: true,
     checkedD: true,
+    isSwitched: false,
   });
 
   const [radioValue, setRadioValue] = useState("CS");
@@ -92,6 +95,9 @@ export default function ArgonForm() {
       [name]: value,
     });
   };
+  function valuetext(value) {
+    return `${value}°C`;
+  }
 
   return (
     <div
@@ -105,7 +111,7 @@ export default function ArgonForm() {
         <form className={classes.root}>
           <Grid container direction="column">
             <Grid container spacing={3}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="standard"
                   name="fullName"
@@ -115,7 +121,7 @@ export default function ArgonForm() {
                   fullWidth
                 ></TextField>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="standard"
                   name="email"
@@ -127,7 +133,7 @@ export default function ArgonForm() {
               </Grid>
             </Grid>
             <Grid container>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
                   id="filled-number"
@@ -141,7 +147,7 @@ export default function ArgonForm() {
               </Grid>
             </Grid>
             <Grid container spacing={3}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="standard"
                   name="branch"
@@ -151,7 +157,7 @@ export default function ArgonForm() {
                   fullWidth
                 ></TextField>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="standard"
                   name="grName"
@@ -257,6 +263,46 @@ export default function ArgonForm() {
                     label="French"
                   />
                 </RadioGroup>
+              </FormControl>
+            </Grid>
+
+            <Grid container>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                id="discrete-slider"
+                gutterBottom
+              >
+                How would you rate your teachers overall?
+              </Typography>
+              <Slider
+                defaultValue={3}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={1}
+                max={5}
+              />
+            </Grid>
+
+            <Grid container>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">
+                  Do you wish to receive emails from Thapar?
+                </FormLabel>
+
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={state.isSwitched}
+                      onChange={handleChange}
+                      name="isSwitched"
+                    />
+                  }
+                  // label="Gilad Gray"
+                />
               </FormControl>
             </Grid>
           </Grid>
