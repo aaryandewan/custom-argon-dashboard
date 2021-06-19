@@ -9,6 +9,8 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
+
 // import DateFnsUtils from "@date-io/date-fns";
 
 // import "date-fns";
@@ -73,11 +75,6 @@ const initialFValues = {
   grName: "",
   email: "",
   mobile: "",
-  city: "",
-  gender: "male",
-  departmentId: "",
-  hireDate: new Date(),
-  isPermanent: false,
 };
 
 export default function ArgonForm() {
@@ -115,10 +112,19 @@ export default function ArgonForm() {
       ...values,
       [name]: value,
     });
+    // console.log("New state is ");
+    // console.log(values);
   };
   function valuetext(value) {
     return `${value}°C`;
   }
+  const formSubmit = () => {
+    // console.log(initialFValues);
+    // console.log("------------------------------");
+    console.log(values);
+    console.log(state);
+    console.log(selectedDate);
+  };
 
   return (
     <div
@@ -346,6 +352,17 @@ export default function ArgonForm() {
                   />
                 </MuiPickersUtilsProvider>
               </FormControl>
+            </Grid>
+
+            <Grid container>
+              <Button
+                // type="submit"
+                onClick={formSubmit}
+                variant="contained"
+                color="primary"
+              >
+                Submit
+              </Button>
             </Grid>
           </Grid>
         </form>
