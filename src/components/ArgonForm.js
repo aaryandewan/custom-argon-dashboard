@@ -97,6 +97,12 @@ export default function ArgonForm() {
   const handleRadioChange = (event) => {
     setRadioValue(event.target.value);
   };
+
+  // const [sliderValue, setSliderValue] = useState(4);
+  // const sliderValueChange = (event) => {
+  //   console.log(event);
+  //   setSliderValue(event.target.value);
+  // };
   const [selectedDate, handleDateChange] = useState(new Date());
 
   const handleDateChangee = (event) => {
@@ -118,12 +124,61 @@ export default function ArgonForm() {
   function valuetext(value) {
     return `${value}°C`;
   }
-  const formSubmit = () => {
+  const formSubmit = async (e) => {
+    e.preventDefault();
     // console.log(initialFValues);
     // console.log("------------------------------");
-    console.log(values);
-    console.log(state);
-    console.log(selectedDate);
+    // console.log(values);
+    // console.log(state);
+    // console.log(selectedDate);
+
+    const finalFormData = {
+      ...values,
+      ...state,
+      radioValuee: radioValue,
+      selectedDatee: selectedDate,
+    };
+    console.log("FATAAAAA");
+    console.log(finalFormData);
+
+    const {
+      fullName,
+      branch,
+      grName,
+      checkedA,
+      checkedB,
+      checkedC,
+      checkedD,
+      email,
+      mobile,
+      isSwitched,
+      radioValuee,
+      selectedDatee,
+    } = finalFormData;
+    const res = await fetch("register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        branch,
+        grName,
+        checkedA,
+        checkedB,
+        checkedC,
+        checkedD,
+        email,
+        mobile,
+        isSwitched,
+        radioValuee,
+        selectedDatee,
+      }),
+    });
+    console.log("Aaryan");
+    console.log(typeof radioValuee);
+    console.log(typeof selectedDatee);
+    const data = await res.json();
   };
 
   return (
@@ -135,7 +190,7 @@ export default function ArgonForm() {
       }}
     >
       <Paper variant="outlined" className={classes.paper}>
-        <form className={classes.root}>
+        <form method="post" className={classes.root}>
           <Grid container direction="column">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
@@ -293,7 +348,7 @@ export default function ArgonForm() {
               </FormControl>
             </Grid>
 
-            <Grid container>
+            {/* <Grid container>
               <Typography
                 variant="h6"
                 color="textSecondary"
@@ -303,6 +358,9 @@ export default function ArgonForm() {
                 How would you rate your teachers overall?
               </Typography>
               <Slider
+                value={sliderValue}
+                onChange={sliderValueChange}
+                onChangeCommitted={sliderValueChange}
                 defaultValue={3}
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
@@ -312,7 +370,7 @@ export default function ArgonForm() {
                 min={1}
                 max={5}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid container>
               <FormControl component="fieldset">

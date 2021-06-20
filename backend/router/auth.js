@@ -8,9 +8,35 @@ router.get("/", (req, res) => {
 const userForm = require("../model/userFormSchema");
 
 router.post("/register", (req, res) => {
-  const { fullName, email, phNumber } = req.body;
+  const {
+    fullName,
+    branch,
+    grName,
+    email,
+    mobile,
+    checkedA,
+    checkedB,
+    checkedC,
+    checkedD,
+    isSwitched,
+    radioValuee,
+    selectedDatee,
+  } = req.body;
 
-  const userFormm = new userForm({ fullName, email, phNumber });
+  const userFormm = new userForm({
+    fullName,
+    branch,
+    grName,
+    email,
+    mobile,
+    checkedA,
+    checkedB,
+    checkedC,
+    checkedD,
+    isSwitched,
+    radioValuee,
+    selectedDatee,
+  });
   userFormm
     .save()
     .then(() => {
@@ -18,7 +44,7 @@ router.post("/register", (req, res) => {
     })
     .catch((error) => console.log(error));
 
-  console.log(fullName);
+  console.log(req.body);
   //   res.json({ message: req.body });
   //   res.send("Don sends");
 });
