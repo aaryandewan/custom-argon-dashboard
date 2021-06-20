@@ -5,9 +5,21 @@ router.get("/", (req, res) => {
   res.send("Routerrr");
 });
 
+const userForm = require("../model/userFormSchema");
+
 router.post("/register", (req, res) => {
-  console.log(req.body);
-  res.json({ message: req.body });
+  const { fullName, email, phNumber } = req.body;
+
+  const userFormm = new userForm({ fullName, email, phNumber });
+  userFormm
+    .save()
+    .then(() => {
+      res.status(201).json({ message: "Form filled" });
+    })
+    .catch((error) => console.log(error));
+
+  console.log(fullName);
+  //   res.json({ message: req.body });
   //   res.send("Don sends");
 });
 
