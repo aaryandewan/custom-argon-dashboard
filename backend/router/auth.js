@@ -21,6 +21,7 @@ router.post("/register", (req, res) => {
     isSwitched,
     radioValuee,
     selectedDatee,
+    sliderValuee,
   } = req.body;
 
   const userFormm = new userForm({
@@ -36,6 +37,7 @@ router.post("/register", (req, res) => {
     isSwitched,
     radioValuee,
     selectedDatee,
+    sliderValuee,
   });
   userFormm
     .save()

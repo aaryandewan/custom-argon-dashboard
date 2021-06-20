@@ -98,11 +98,11 @@ export default function ArgonForm() {
     setRadioValue(event.target.value);
   };
 
-  // const [sliderValue, setSliderValue] = useState(4);
-  // const sliderValueChange = (event) => {
-  //   console.log(event);
-  //   setSliderValue(event.target.value);
-  // };
+  const [sliderValue, setSliderValue] = useState(4);
+  const sliderValueChange = (event, newValue) => {
+    console.log(newValue);
+    setSliderValue(newValue);
+  };
   const [selectedDate, handleDateChange] = useState(new Date());
 
   const handleDateChangee = (event) => {
@@ -137,6 +137,7 @@ export default function ArgonForm() {
       ...state,
       radioValuee: radioValue,
       selectedDatee: selectedDate,
+      sliderValuee: sliderValue,
     };
     console.log("FATAAAAA");
     console.log(finalFormData);
@@ -154,6 +155,7 @@ export default function ArgonForm() {
       isSwitched,
       radioValuee,
       selectedDatee,
+      sliderValuee,
     } = finalFormData;
     const res = await fetch("register", {
       method: "POST",
@@ -173,6 +175,7 @@ export default function ArgonForm() {
         isSwitched,
         radioValuee,
         selectedDatee,
+        sliderValuee,
       }),
     });
     console.log("Aaryan");
@@ -348,7 +351,7 @@ export default function ArgonForm() {
               </FormControl>
             </Grid>
 
-            {/* <Grid container>
+            <Grid container>
               <Typography
                 variant="h6"
                 color="textSecondary"
@@ -360,7 +363,7 @@ export default function ArgonForm() {
               <Slider
                 value={sliderValue}
                 onChange={sliderValueChange}
-                onChangeCommitted={sliderValueChange}
+                // onChangeCommitted={sliderValueChange}
                 defaultValue={3}
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
@@ -370,7 +373,7 @@ export default function ArgonForm() {
                 min={1}
                 max={5}
               />
-            </Grid> */}
+            </Grid>
 
             <Grid container>
               <FormControl component="fieldset">

@@ -13,6 +13,7 @@ const userFormSchema = new mongoose.Schema({
   isSwitched: { type: Boolean },
   radioValuee: { type: String },
   selectedDatee: { type: String },
+  sliderValuee: { type: Number },
 });
 
 const userForm = mongoose.model("USER", userFormSchema);
